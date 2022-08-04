@@ -28,12 +28,15 @@ class CloseWindowsCommand(sublime_plugin.WindowCommand):
     details: List[str] = \
       [
         f"folder: {window_detail.folder}",
-        f"active view: {window_detail.active_view}"
       ]
     annotation = f"views({str(window_detail.view_count)})"
     return sublime.QuickPanelItem(window_detail.short_name, details, annotation, sublime.KIND_AMBIGUOUS)
 
   def on_select(self, open_windows: List[WindowDetail] ,index: int) -> None:
     if index >= 0 and len(open_windows) > index:
-      # open_windows[index].window.bring_to_front()
-      open_windows[index].window.run_command('close_window')
+      window_detail = open_windows[index]
+      view_count = str(window_detail.view_count)
+      result = sublime.yes_no_cancel_dialog(f"Close {window_detail.short_name} with {view_count} views?", title="Confirm Close Window")
+      if result == sublime.DIALOG_YES:
+        window_detail.window.run_command('close_window')
+
