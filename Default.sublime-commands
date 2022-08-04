@@ -1,3 +1,4 @@
 [
-    { "caption": "OpenWindows: Switch", "command": "open_windows" }
+    { "caption": "OpenWindows: Switch", "command": "open_windows" },
+    { "caption": "OpenWindows: Close", "command": "close_windows" }
 ]
