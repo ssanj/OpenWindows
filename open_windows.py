@@ -6,10 +6,10 @@ import json
 import subprocess
 from OpenWindows.window_detail import WindowDetail
 
-class OpenWindowsCommand(sublime_plugin.WindowCommand):
+class OpenWindowsCommand(sublime_plugin.ApplicationCommand):
 
   def run(self):
-    window = self.window
+    window = sublime.active_window()
     if window:
 
         open_windows: List[sublime.Window] = sublime.windows()
